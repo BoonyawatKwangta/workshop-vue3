@@ -1,29 +1,24 @@
-import { fileURLToPath, URL } from 'node:url'
-
-import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import autoImport from 'unplugin-auto-import/vite'
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
+import { fileURLToPath, URL } from 'node:url'
+import { defineConfig } from 'vite'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: './',
+  build: { assetsDir: 'assets' },
   plugins: [
-    vue({ 
-      template: { transformAssetUrls }
-    }),
-    vuetify({
-      styles: {
-        configFile: 'src/styles/base.scss'
-      }
-    }),
-    vueDevTools(),
     autoImport({
       imports: [
         'vue',
         'vue-router',
         {
-          vuetify: ['useDisplay']
+          vuetify: ['useDisplay'],
+          '@/plugins/stores': [
+            'useAuthStore'
+          ]
         }
       ],
       dts: 'src/auto-imports.d.ts',
@@ -31,18 +26,32 @@ export default defineConfig({
         enabled: true
       },
       vueTemplate: true
-    })
+    }),
+    vue({ 
+      template: { transformAssetUrls }
+    }),
+    vuetify({
+      autoImport: true,
+      styles: {
+        configFile: 'src/styles/vuetify.scss'
+      }
+    }),
+    vueDevTools(),
   ],
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@use '@/styles/base' as *;`
+        additionalData: `
+          @use '@/styles/variable' as *;
+          @use '@/styles/mixin' as *;
+        `
       }
     }
   },
   optimizeDeps: {
     exclude: [
-      'vuetify'
+      'vuetify',
+      'vue-router'
     ]
   },
   resolve: {

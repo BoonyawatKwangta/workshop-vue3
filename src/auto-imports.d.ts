@@ -53,7 +53,10 @@ declare global {
   const toValue: typeof import('vue')['toValue']
   const triggerRef: typeof import('vue')['triggerRef']
   const unref: typeof import('vue')['unref']
+  const useAccountStore: typeof import('../../../../../../plugins/stores')['useAccountStore']
   const useAttrs: typeof import('vue')['useAttrs']
+  const useAuthStore: typeof import('@/plugins/stores')['useAuthStore']
+  const useBusinessStore: typeof import('../../../../../../plugins/stores')['useBusinessStore']
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
   const useDisplay: typeof import('vuetify')['useDisplay']
@@ -62,6 +65,7 @@ declare global {
   const useModel: typeof import('vue')['useModel']
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']
+  const useServiceStore: typeof import('../../../../../../plugins/stores')['useServiceStore']
   const useSlots: typeof import('vue')['useSlots']
   const useTemplateRef: typeof import('vue')['useTemplateRef']
   const watch: typeof import('vue')['watch']
@@ -129,6 +133,7 @@ declare module 'vue' {
     readonly triggerRef: UnwrapRef<typeof import('vue')['triggerRef']>
     readonly unref: UnwrapRef<typeof import('vue')['unref']>
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
+    readonly useAuthStore: UnwrapRef<typeof import('@/plugins/stores')['useAuthStore']>
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
     readonly useDisplay: UnwrapRef<typeof import('vuetify')['useDisplay']>

@@ -77,6 +77,10 @@
     "watch": true,
     "watchEffect": true,
     "watchPostEffect": true,
-    "watchSyncEffect": true
+    "watchSyncEffect": true,
+    "useAccountStore": true,
+    "useAuthStore": true,
+    "useBusinessStore": true,
+    "useServiceStore": true
   }
 }

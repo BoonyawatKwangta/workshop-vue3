@@ -1,37 +1,31 @@
 <template>
-  <v-card
-    class="mx-auto"
-    max-width="344"
-    @click="goToProduct"
-  >
-    <v-img
-      :src="props.img"
-      height="200px"
-      cover
-    ></v-img>
+  <v-card :width="props.width" :max-width="props.maxWidth" :height="props.height" :max-height="props.maxHeight" :color="props.color" @click="goToProduct">
+    <v-img :src="props.img" height="200" cover />
 
-    <v-card-title>{{ props.title }}</v-card-title>
+    <v-card-item>
+      <v-card-title>{{ props.title }}</v-card-title>
+      <v-card-subtitle> ราคา {{ props.price }} </v-card-subtitle>
+    </v-card-item>
 
-    <v-card-subtitle>
-      ราคา {{ props.price }}
-    </v-card-subtitle>
-
-    <v-card-text>
-      {{ props.text }}
-    </v-card-text>
+    <v-card-text class="multi-ellipsis">{{ props.text }}</v-card-text>
   </v-card>
 </template>
 
 <script setup lang="ts">
   interface Props {
-    id?: string
+    id: string | number
     img?: string
     title?: string
     price?: number
     text?: string
+    width?: string | number
+    height?: string | number
+    maxWidth?: string | number
+    maxHeight?: string | number
+    color?: string
   }
   interface Emits {
-    goToProduct: [id: string]
+    goToProduct: [id: string | number]
   }
 
   const props = withDefaults(defineProps<Props>(), {
@@ -48,4 +42,14 @@
 </script>
 
 <style scoped>
+.multi-ellipsis {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 60px;
+  line-clamp: 3;
+  box-orient: vertical;
+}
 </style>
