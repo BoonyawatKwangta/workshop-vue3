@@ -2,25 +2,25 @@ import { instance } from '../instance'
 import { handleApiError } from '../helpers'
 
 export default {
-  async getAll<T>(): Promise<T[]> {
+  async getAll<TRes>(): Promise<TRes> {
     try {
-      const response = await instance.get<T[]>('/product')
+      const response = await instance.get<TRes>('/product')
       return response.data
     } catch (err) {
       handleApiError(err, 'getAll')
     }
   },
-  async getById<T>(id: string | number): Promise<T> {
+  async getById<TRes>(id: string | number): Promise<TRes> {
     try {
-      const response = await instance.get<T>(`/product/${id}`)
+      const response = await instance.get<TRes>(`/product/${id}`)
       return response.data
     } catch (err) {
       handleApiError(err, 'getById')
     }
   },
-  async search<T>(keyword: string): Promise<T[]> {
+  async search<TRes>(keyword: string): Promise<TRes> {
     try {
-      const response = await instance.get<T[]>('/product', { params: { keyword } })
+      const response = await instance.get<TRes>('/product', { params: { keyword } })
       return response.data
     } catch (err) {
       handleApiError(err, 'search')
@@ -52,9 +52,9 @@ export default {
       handleApiError(err, 'update')
     }
   },
-  async delete<T>(id: string | number): Promise<T> {
+  async delete<TRes>(id: string | number): Promise<TRes> {
     try {
-      const response = await instance.delete<T>(`/product/${id}`)
+      const response = await instance.delete<TRes>(`/product/${id}`)
       return response.data
     } catch (err) {
       handleApiError(err, 'delete')

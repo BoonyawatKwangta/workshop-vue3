@@ -57,6 +57,7 @@
   const password = ref('')
   const form = useTemplateRef('form')
   const authStore = useAuthStore()
+  const router = useRouter()
   const usernameRules = ref([
     (v: string) => !!v || 'Name is required'
   ])
@@ -71,6 +72,7 @@
         const body = { username: username.value, password: password.value }
         const response = await authApi.login<LoginBody, LoginResponse>(body)
         authStore.setup(response.token)
+        router.push({ name: 'HomePage'})
       }
     } catch (error) {
       alert(error)
